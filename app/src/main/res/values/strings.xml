@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Zomato Application</string>
+    <string name="no_internet_connection">Please check your network connections</string>
+    <string name="restaurants_nearby">Restaurants nearby</string>
+</resources>
