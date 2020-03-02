@@ -8,6 +8,8 @@
         <variable
             name="data"
             type="com.zomatoapplication.service.model.Restaurant" />
+
+        <variable name="callback" type="com.zomatoapplication.view.callback.DataClickCallback"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -16,8 +18,10 @@
         android:layout_marginStart="@dimen/margin_8"
         android:layout_marginEnd="@dimen/margin_8"
         android:orientation="horizontal"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:cardCornerRadius="@dimen/margin_8"
-        app:cardUseCompatPadding="true">
+        app:cardUseCompatPadding="true"
+        android:onClick="@{() ->  callback.onClick(data.restaurant)}">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,9 +46,9 @@
                     android:id="@+id/titleTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans_semibold"
+                    android:fontFamily="@font/gotham"
                     android:text="@{data.restaurant.name}"
-                    android:textColor="@color/titleColorBlack"
+                    android:textColor="@color/colorTitleBlack"
                     android:textSize="@dimen/text_size_12"
                     android:textStyle="bold"/>
 
@@ -53,10 +57,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_4"
-                    android:fontFamily="@font/open_sans"
+                    android:fontFamily="@font/gotham"
                     android:minLines="3"
                     android:text="@{data.restaurant.cuisines}"
-                    android:textColor="@color/subTitleColorBlack"
+                    android:textColor="@color/colorSubTitleBlack"
                     android:textSize="@dimen/text_size_10" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -64,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_4"
-                    android:fontFamily="@font/open_sans"
+                    android:fontFamily="@font/gotham"
                     android:text="@{data.restaurant.averageCostInString}"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/text_size_8" />

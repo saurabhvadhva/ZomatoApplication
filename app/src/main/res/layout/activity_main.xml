@@ -17,11 +17,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
-            android:fontFamily="@font/open_sans"
+            android:fontFamily="@font/gotham"
             android:textSize="@dimen/text_size_16"
             android:text="@string/restaurants_nearby"
             android:textAllCaps="true"
-            android:gravity="center" />
+            android:gravity="center"/>
 
     </androidx.appcompat.widget.Toolbar>
 

@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.zomatoapplication.R;
+import com.zomatoapplication.service.model.Restaurant;
+import com.zomatoapplication.service.model.RestaurantItem;
+import com.zomatoapplication.utils.Constants;
 
 import javax.inject.Inject;
 
@@ -30,6 +33,19 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, fragment, DataListFragment.TAG).commit();
         }
+    }
+
+    /**
+     * Shows the detail fragment
+     */
+    public void show(RestaurantItem restaurantItem) {
+        DetailFragment detailFragment = DetailFragment.forRestaurant(restaurantItem.getUrl());
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack(Constants.DETAIL)
+                .replace(R.id.fragment_container,
+                        detailFragment, null).commit();
     }
 
     @Override

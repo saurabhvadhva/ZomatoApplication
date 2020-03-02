@@ -12,15 +12,18 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.zomatoapplication.R;
 import com.zomatoapplication.databinding.FragmentDataListBinding;
 import com.zomatoapplication.di.Injectable;
+import com.zomatoapplication.service.model.RestaurantItem;
 import com.zomatoapplication.utils.AppStatus;
 import com.zomatoapplication.utils.Utility;
 import com.zomatoapplication.view.adapter.DataAdapter;
+import com.zomatoapplication.view.callback.DataClickCallback;
 import com.zomatoapplication.viewmodel.DataViewModel;
 
 import java.util.ArrayList;
@@ -44,7 +47,7 @@ public class DataListFragment extends Fragment implements Injectable {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_data_list, container, false);
-        dataAdapter = new DataAdapter();
+        dataAdapter = new DataAdapter(dataClickCallback);
         binding.dataRv.setAdapter(dataAdapter);
         binding.swipeLayout.setRefreshing(true);
 
@@ -85,4 +88,11 @@ public class DataListFragment extends Fragment implements Injectable {
 
         }
     }
+
+    private final DataClickCallback dataClickCallback = restaurantItem -> {
+
+        if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+            ((MainActivity) getActivity()).show(restaurantItem);
+    }
+};
 }

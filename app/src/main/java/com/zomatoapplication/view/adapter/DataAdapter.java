@@ -1,8 +1,10 @@
 package com.zomatoapplication.view.adapter;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.zomatoapplication.R;
 import com.zomatoapplication.databinding.ItemListDataBinding;
 import com.zomatoapplication.service.model.Restaurant;
+import com.zomatoapplication.utils.Utility;
+import com.zomatoapplication.view.callback.DataClickCallback;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,6 +21,13 @@ import java.util.Objects;
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataViewHolder> {
 
     List<Restaurant> mDataList;
+
+    @Nullable
+    private final DataClickCallback dataClickCallback;
+
+    public DataAdapter(@Nullable DataClickCallback dataClickCallback) {
+        this.dataClickCallback = dataClickCallback;
+    }
 
     public void setDataList(final List<Restaurant> dataList) {
         if (this.mDataList == null) {
@@ -57,7 +68,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataViewHolder
                 .inflate(LayoutInflater.from(parent.getContext()), R.layout.item_list_data,
                         parent, false);
 
-
+        binding.setCallback(dataClickCallback);
         return new DataViewHolder(binding);
     }
 
@@ -65,6 +76,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DataViewHolder
     public void onBindViewHolder(DataViewHolder holder, int position) {
         holder.binding.setData(mDataList.get(position));
         holder.binding.executePendingBindings();
+        //holder.binding.getRoot().setOnClickListener(view -> Utility.showToast(holder.binding.getRoot().getContext(),"Clicked!!"));
     }
 
     public List<Restaurant> getDataList()  {
